@@ -2,7 +2,6 @@ import os
 
 # Configuration setting to determine the source of sensitive information
 USE_DOCKER_SECRETS = True
-#url = 'amqps://wqeixhdm:R8TtQzBLzIlduXU4sJjpg0GZWnXeXzg4@whale.rmq.cloudamqp.com/wqeixhdm'
 
 def read_secret(secret_name):
     if USE_DOCKER_SECRETS:

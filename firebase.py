@@ -10,7 +10,7 @@ from config import read_secret
 # Initialize Firebase Admin SDK
 
 #shai - you should change to secret again
-mounted_directory = 'cred/erviceAccountKey.json' #'/container/app/erviceAccountKey.json'
+mounted_directory = '/cred/erviceAccountKey.json' #'/container/app/erviceAccountKey.json'
 
 cred = credentials.Certificate(mounted_directory)
 firebase_admin.initialize_app(cred, {

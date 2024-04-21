@@ -1,4 +1,5 @@
 import os
+from google.cloud import secretmanager 
 
 # Configuration setting to determine the source of sensitive information
 USE_DOCKER_SECRETS = True
@@ -8,20 +9,15 @@ GMAIL_ADDRESS = 'GMAIL_ADDRESS'
 RABBIT_MQ = 'RABBIT_MQ'
 BASE_URL = 'BASE_URL'
 LIST_OF_DOMAINS = 'LIST_OF_DOMAINS'
+project_id = 'pewpew-421014'
 
-def read_secret(secret_name):
-    if USE_DOCKER_SECRETS:
-        secret_path = '/run/secrets/{}'.format(secret_name)
-        try:
-            with open(secret_path, 'r') as file:
-                secret_value = file.read().strip()
-                return secret_value
-        except FileNotFoundError:
-            print("Secret '{}' not found.".format(secret_name))
-            return None
-    else:
-        # Read from environment variable
-        return os.getenv(secret_name)	#os.environ[secret_name]
+
+
+def read_secret(secret_id):
+    client = secretmanager.SecretManagerServiceClient()
+    name = f"projects/{project_id}/secrets/{secret_id}/versions/latest"
+    response = client.access_secret_version(request={"name": name})
+    return response.payload.data.decode('UTF-8') 
         
 
 

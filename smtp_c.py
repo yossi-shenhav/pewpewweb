@@ -7,19 +7,13 @@ from firebase import getchecksumSignature
 
 
 from email.mime.text import MIMEText
-from config imort read_secret
-
-# This is the Gmail address to send emails from
-GMAIL_ADDRESS = 'GMAIL_ADDRESS'	#'ranger@komodosec.com'
-# This is the app-specific password:(https://support.google.com/accounts/answer/185833?hl=en)
-GMAIL_PASSWORD = 'GMAIL_PASSWORD'
-BASE_URL = 'BASE_URL'
+from config import * 
 
 
 
 
 def sendSMTP(to_email, subject, message):
-	from_email = read_secret(GMAIL_ADDRESS])
+	from_email = read_secret(GMAIL_ADDRESS)
 	#print("##### " + from_email)
 	pwd = read_secret(GMAIL_PASSWORD)  
 	print("##### " + pwd)

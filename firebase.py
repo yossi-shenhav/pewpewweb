@@ -5,7 +5,7 @@ import os
 import json
 from firebase_admin import credentials
 from firebase_admin import db
-from config import read_secret
+from config1 import read_secret
 
 # Initialize Firebase Admin SDK
 

@@ -1,8 +1,8 @@
 import pika
 import json
-from config import read_secret
+from config1 import read_secret, RABBIT_MQ
 
-RABBITMQ = 'RABBITMQPW'
+#RABBITMQ = 'RABBIT_MQ'
 
 class UUIDEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -12,7 +12,7 @@ class UUIDEncoder(json.JSONEncoder):
    	 
 def sendMessageToQueue(scantype, scan_id, email, host):
 	# Access the CLODUAMQP_URL environment variable and parse it
-	url = read_secret(RABBITMQ)
+	url = read_secret(RABBIT_MQ)
 
 
 	message = {

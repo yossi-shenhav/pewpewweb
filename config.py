@@ -2,6 +2,12 @@ import os
 
 # Configuration setting to determine the source of sensitive information
 USE_DOCKER_SECRETS = True
+BUCKET_URL = 'https://pewpewscanresults.s3.amazonwas.com/'
+GMAIL_PASSWORD = 'GMAIL_PASSWORD'
+GMAIL_ADDRESS = 'GMAIL_ADDRESS'
+RABBIT_MQ = 'RABBIT_MQ'
+BASE_URL = 'BASE_URL'
+LIST_OF_DOMAINS = 'LIST_OF_DOMAINS'
 
 def read_secret(secret_name):
     if USE_DOCKER_SECRETS:

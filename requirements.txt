@@ -2,3 +2,5 @@ flask
 firebase_admin
 uuid
 pika
+google-cloud
+google-cloud-secret-manager

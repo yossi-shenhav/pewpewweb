@@ -1,6 +1,6 @@
 import pika
 import json
-from config1 import read_secret, RABBIT_MQ
+from config import read_secret, RABBIT_MQ
 
 #RABBITMQ = 'RABBIT_MQ'
 

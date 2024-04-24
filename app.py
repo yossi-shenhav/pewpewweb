@@ -10,11 +10,21 @@ from validate import *
 from smtp_c import sendEmail
 from sendQ import sendMessageToQueue
 import logging
+import importlib
+from conf import PROD
+
+if PROD:
+    config = importlib.import_module("config")
+else:
+    config = importlib.import_module("config1")
+
+	
 
 app = Flask(__name__)
 #executor = ThreadPoolExecutor()
-app.config['DEBUG'] = True  # Enable debug mode
-logging.basicConfig(level=logging.DEBUG)
+app.config['DEBUG'] = config.DEBUG	#True  # Enable debug mode
+if config.DEBUG:
+	logging.basicConfig(level=logging.DEBUG)
     
        	 
 
@@ -159,7 +169,7 @@ def validate_domain(domain):
 		return False
         
 def validate_type(input_type):
-    allowed_types = ['XSS', 'subdomain', 'FullScan', 'LFI']
+    allowed_types = config.ALLOWED_TYPES	#['XSS', 'subdomain', 'FullScan', 'LFI']
     
     return input_type in allowed_types
        	

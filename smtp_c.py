@@ -7,15 +7,21 @@ from firebase import getchecksumSignature
 
 
 from email.mime.text import MIMEText
-from config import * 
+#from config import * 
+import importlib
+from conf import PROD
 
+if PROD:
+    config = importlib.import_module("config")
+else:
+    config = importlib.import_module("config1")
 
 
 
 def sendSMTP(to_email, subject, message):
-	from_email = read_secret(GMAIL_ADDRESS)
+	from_email = config.read_secret(config.GMAIL_ADDRESS)
 	#print("##### " + from_email)
-	pwd = read_secret(GMAIL_PASSWORD)  
+	pwd = config.read_secret(config.GMAIL_PASSWORD)  
 	print("##### " + pwd)
 	msg = MIMEText(message,'html')
 	msg['Subject'] = subject
@@ -34,7 +40,7 @@ def sendSMTP(to_email, subject, message):
 
 def sendEmail(email, emailid):
 	#first we need generate URL
-	baseurl = read_secret(BASE_URL)
+	baseurl = config.read_secret(config.BASE_URL)
 	mail = email.replace("+", "%2B") #url encode + sign
 	
 	checksum = getchecksumSignature(email, emailid)

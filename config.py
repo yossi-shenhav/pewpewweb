@@ -3,6 +3,9 @@ from google.cloud import secretmanager
 
 # Configuration setting to determine the source of sensitive information
 USE_DOCKER_SECRETS = True
+DEBUG = False
+ALLOWED_TYPES = ['XSS', 'subdomain', 'PortScan', 'LFI', 'SSLScan', 'FullScan', 'hiddendir', 'FasrPortScan']
+
 BUCKET_URL = 'BUCKET_URL'	#'https://pewpewscanresults.s3.amazonwas.com/'
 GMAIL_PASSWORD = 'GMAIL_PASSWORD'
 GMAIL_ADDRESS = 'GMAIL_ADDRESS'

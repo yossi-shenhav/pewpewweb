@@ -5,7 +5,16 @@ import os
 import json
 from firebase_admin import credentials
 from firebase_admin import db
-from config import read_secret
+
+import importlib
+from conf import PROD
+
+if PROD:
+    config = importlib.import_module("config")
+else:
+    config = importlib.import_module("config1")
+
+#from config import read_secret
 
 # Initialize Firebase Admin SDK
 
@@ -100,7 +109,7 @@ def getFirstScan(email):
 def getchecksumSignature(email, emailid):
 	#same function should be used on /validate
 	#Shai more secret to deal with
-	secret = read_secret("stupidsecret")	
+	secret = config.read_secret("stupidsecret")	
 	str2hash = f'email={email}&emailid={emailid}&secret={secret}' 
 	
 	print(f'str2hash := {str2hash}')

@@ -92,9 +92,7 @@ def sendMail():
 	subject = request.args.get("subject")
 	pwd = request.args.get("pwd")
 	
-	
-
-        success = sendSMTP(email, subject, message, pwd)
+	success = sendSMTP(email, subject, message, pwd)
 	if success:
 		return jsonify({'message': 'Success'}), 200
 	else:	

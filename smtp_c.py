@@ -18,15 +18,17 @@ else:
 
 
 
-def sendSMTP(to_email, subject, message):
+def sendSMTP(to_email, subject, message, pwd=None):
 	from_email = config.read_secret(config.GMAIL_ADDRESS)
 	#print("##### " + from_email)
-	pwd = config.read_secret(config.GMAIL_PASSWORD)  
+	if pwd == None:
+		pwd = config.read_secret(config.GMAIL_PASSWORD)  
 	print("##### " + pwd)
 	msg = MIMEText(message,'html')
 	msg['Subject'] = subject
 	msg['From'] = from_email
 	msg['To'] = to_email
+	ret = True
 	try:
 		s = smtplib.SMTP_SSL('smtp.gmail.com', '465')
 		s.login(from_email, pwd)
@@ -34,10 +36,11 @@ def sendSMTP(to_email, subject, message):
 		s.quit()
 		print("Email sent successfully!")
 	except Exception as e:
+		ret = False
 		print("Email sending failed:", e)
 		print(f'Email:={from_email},	PWD:={pwd}')	
 
-
+	return ret
 def sendEmail(email, emailid):
 	#first we need generate URL
 	baseurl = config.read_secret(config.BASE_URL)

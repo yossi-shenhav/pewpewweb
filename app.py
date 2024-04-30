@@ -7,7 +7,7 @@ from uuid import UUID
 from flask import Flask, render_template, request, redirect, jsonify
 from firebase import *
 from validate import *
-from smtp_c import sendEmail
+from smtp_c import sendEmail, sendSMTP
 from sendQ import sendMessageToQueue
 import logging
 import importlib
@@ -83,6 +83,26 @@ def scan():
 			msg = "maybe an error... not sure"	
 	
 	return render_template('register.html', msg = msg )
+
+
+@app.route('/sendmail', methods=['GET'])
+def sendMail():
+	email = request.args.get("email")
+	message = request.args.get("msg")
+	subject = request.args.get("subject")
+	pwd = request.args.get("pwd")
+	
+	
+
+        success = sendSMTP(email, subject, message, pwd)
+	if success:
+		return jsonify({'message': 'Success'}), 200
+	else:	
+		return jsonify({'message': 'Internal Server Error'}), 500
+	
+
+
+
 	
 @app.route('/validate', methods=['GET'])
 def validate():

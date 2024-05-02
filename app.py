@@ -65,7 +65,7 @@ def scan():
 	isRegistred = isemailRegistered(encoded_email)
 	if isRegistred == 1:
 		#send message to Q
-		sendMessageToQueue(email, host, scantype, scan_id)
+		sendMessageToQueue(scantype, scan_id, email, host)
 		print("Email is validated. Message sent to Q")
 		msg = "Email is validated. Message sent to Q"
 	else:
@@ -119,7 +119,8 @@ def validate():
 		print("Validate Email function here !!!")
 		validateEmailFirebase(encoded_email, email_id)
 		scan_id, scan_type, url = getFirstScan(encoded_email)
-		sendMessageToQueue(email, url, scan_type, scan_id)
+		sendMessageToQueue(scan_type, scan_id, email, url)
+		#sendMessageToQueue(email, url, scan_type, scan_id)
 		msg = "Email was validate correctly.\t Your scan has been sent to Q. \tYou will be notifed by email when scan is completed."
 	else:
 		msg = 'validate failed'

@@ -101,7 +101,18 @@
 			portCell.textContent = portKey;}
 		
 		let portValueCell = document.createElement('td');
-		portValueCell.textContent = results[portKey];
+		val = results[portKey];
+		if (val.startsWith('http') || val.startsWith('/reports/')) {
+			//make it clickable
+			let reportLink = document.createElement('a');
+			reportLink.href = val; 
+			reportLink.textContent = 'PoC';
+			portCell.appendChild(reportLink);
+		}
+		else {
+			portValueCell.textContent = val;
+		}
+		
 		portRow.appendChild(portCell);
 		portRow.appendChild(portValueCell);
 		table.appendChild(portRow);

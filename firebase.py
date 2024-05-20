@@ -128,11 +128,16 @@ def get_scans_by_hostname(hostname):
 	uuid_list = {}
 	reports = reports_ref.get()
 	if reports:
+		indx = 1
 		for uuid, data in reports.items():
-			if data.get('hostname') == hostname:
+			hn = data.get('hostname')
+			#print(f'hostname:={hn}\n')
+			if hn == hostname:
 				for child_name in data.keys():
-					path = f"/reports/{uuid}/{child_name}"
-					uuid_list[child_name] = path
+					if child_name != 'hostname':
+						path = f"/reports/{uuid}/{child_name}"
+						uuid_list[f'child_name{indx}'] = path
+						indx += 1
 
 	return {'hostname': hostname, 'scantype': 'blank', 'results': uuid_list}
 

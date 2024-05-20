@@ -105,13 +105,13 @@
 		if (val.startsWith('http') || val.startsWith('/reports/')) {
 			//make it clickable
 			let reportLink = document.createElement('a');
-			reportLink.href = val; 
+			reportLink.href = decodeURIComponent(val);
 			reportLink.textContent = 'PoC';
 			portCell.appendChild(reportLink);
 		}
-		else {
-			portValueCell.textContent = val;
-		}
+		
+		portValueCell.textContent = val;
+		
 		
 		portRow.appendChild(portCell);
 		portRow.appendChild(portValueCell);

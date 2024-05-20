@@ -151,7 +151,7 @@ def get_url_list():
 	pwd = request.args.get('pwd')
 	host = request.args.get('domain')
 	result = None
-	if (pwd == read_secret('LIST_OF_DOMAINS')):
+	if (pwd == config.read_secret('LIST_OF_DOMAINS')):
 		result = get_scans_by_hostname(host)
 			
 	print(result)
